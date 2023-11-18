@@ -1,0 +1,71 @@
+---
+title: "Exploration of UN Data Using tidyverse"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+1.	Using the `read_csv()` function, read the GDP dataset into your notebook as a tibble called `gdp_df`. After reading it in, inspect the first 10 rows and then inspect the last 10 rows. 
+
+```{r}
+gdp_df <- read.csv("../data/gdp_per_capita.csv")
+```
+
+```{r}
+gdp_df |>
+  head(10)
+```
+
+```{r}
+gdp_df |> 
+  tail(10)
+```
+
+2. Drop the 'Value Footnotes' column, and rename the remaining columns to 'Country', 'Year', and 'GDP_Per_Capita'.
+
+```{r}
+gdp_df <- gdp_df |> 
+  select(!Value.Footnotes) |> 
+  rename(Country = Country.or.Area, Gdp_Per_Capita = Value)
+```
+
+3. Which years are represented in this dataset? How many observations are there per year? Make a plot to view the number of observations per year.
+
+```{r}
+gdp_df |> 
+  group_by(Year) |> 
+  count()
+```
+
+```{r}
+gdp_df |> 
+  ggplot(aes(x = Year)) +
+  geom_bar() +
+  labs(title = "Number of Observations by Year")
+```
+
+4. How many countries are represented in this dataset? Which countries have the fewest observations?
+
+```{r}
+gdp_df |> 
+  summarize(num_countries = n_distinct(Country))
+```
+
+```{r}
+gdp_df |> 
+  group_by(Country) |> 
+  count()
+```
+
+5. Create a new dataframe by subsetting `gdp_df` to just the year 2014. Call this new dataframe `gdp_2014`.
+
+```{r}
+gdp_2014 <- gdp_df |> 
+  filter(Year == 2014)
+```
+
+
+
