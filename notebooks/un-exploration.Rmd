@@ -108,7 +108,7 @@ gdp_pivoted <- gdp_df |>
 10. Create a new column in `gdp_pivoted` named `Percent_Change`. This column should contain the percent change in GDP_Per_Capita from 1990 to 2018. Hint: Percent change is calculated as 100*(New Value - Old Value) / Old Value.
 
 ```{r}
-gdp_pivoted |> 
+gdp_pivoted <- gdp_pivoted |> 
   rowwise() |> 
   mutate(Percent_Change = 100 * (`2018` - `1990`) / `1990`) |> 
   ungroup()
