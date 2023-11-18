@@ -67,7 +67,7 @@ gdp_2014 <- gdp_df |>
   filter(Year == 2014)
 ```
 
-6. Use `.describe()` to find the summary statistics for GDP per capita in 2014. 
+6. Use `summary` to find the summary statistics for GDP per capita in 2014. 
 
 ```{r}
 gdp_2014 |> 
@@ -94,3 +94,16 @@ gdp_2014 |>
   arrange(desc(Gdp_Per_Capita)) |> 
   top_n(5)
 ```
+
+9. Now, return to the full dataset, `gdp_df`. Pivot the data for 1990 and 2018 (using the tidyr `.pivot_wider()` method or another method) so that each row corresponds to a country, each column corresponds to a year, and the values in the table give the GDP_Per_Capita amount. Drop any rows that are missing values for either 1990 or 2018. Save the result to a dataframe named `gdp_pivoted`.
+
+```{r}
+gdp_pivoted <- gdp_df |> 
+  filter(Year == 1990 | Year == 2018) |> 
+  pivot_wider(names_from = Year,
+              values_from = Gdp_Per_Capita) |> 
+  drop_na()
+```
+
+
+
