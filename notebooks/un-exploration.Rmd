@@ -67,5 +67,30 @@ gdp_2014 <- gdp_df |>
   filter(Year == 2014)
 ```
 
+6. Use `.describe()` to find the summary statistics for GDP per capita in 2014. 
 
+```{r}
+gdp_2014 |> 
+  summary(Gdp_Per_Capita)
+```
+7. Create a histogram of GDP Per Capita numbers for 2014 (you may wish to adjust the number of bins for your histogram).
 
+```{r}
+gdp_2014 |> 
+  ggplot(aes(x = Gdp_Per_Capita)) +
+  geom_histogram() +
+  labs(title = "GRP Per Capita for 2014")
+```
+
+8. Find the top 5 counties and bottom 5 countries by GDP per capita in 2014.
+
+```{r}
+gdp_2014 |> 
+  arrange(Gdp_Per_Capita) |> 
+  top_n(5)
+```
+```{r}
+gdp_2014 |> 
+  arrange(desc(Gdp_Per_Capita)) |> 
+  top_n(5)
+```
