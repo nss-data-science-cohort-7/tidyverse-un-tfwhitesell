@@ -114,4 +114,11 @@ gdp_pivoted <- gdp_pivoted |>
   ungroup()
 ```
 
+11. How many countries experienced a negative percent change in GDP per capita from 1990 to 2018?
+
+```{r}
+gdp_pivoted |> 
+  filter(Percent_Change < 0) |> 
+  count()
+```
 
