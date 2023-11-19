@@ -122,3 +122,19 @@ gdp_pivoted |>
   count()
 ```
 
+12. Which country had the highest % change in GDP per capita? Create a line plot showing this country's GDP per capita for all years for which you have data. Put both line charts on the same plot.
+
+```{r}
+gdp_pivoted |> 
+  arrange(desc(Percent_Change)) |> 
+  head(1)
+```
+
+```{r}
+gdp_df |> 
+  filter(Country == "Equatorial Guinea") |> 
+  ggplot(aes(x = Year, y = Gdp_Per_Capita)) +
+  geom_line() +
+  labs(title = "GDP of Equatorial Guinea 1990-2018")
+```
+
