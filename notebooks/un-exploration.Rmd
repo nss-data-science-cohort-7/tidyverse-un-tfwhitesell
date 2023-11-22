@@ -5,6 +5,7 @@ output: html_notebook
 
 ```{r}
 library(tidyverse)
+library(corrr)
 ```
 
 
@@ -250,24 +251,32 @@ gdp_le_2019 |>
 ```
 There is a correlation between the variables but the relationship is not linear. As GDP per capita increases life expectancy also increases, but the rate of increase levels off at higher GDP values.
 
-```{r}
-gdp_le_2019 |> 
-  ggplot(aes(x = Gdp_Per_Capita, y = Life_Expectancy)) +
-  geom_point() +
-  scale_x_log10()
-```
-
-Since GDP per capita has values over orders of magnitude, transforming it to a log scale shows a linear relationship.
-
-
 24. Find the correlation between Life Expectancy and GDP per Capita for the year 2019. What is the meaning of this number?
 
 ```{r}
-
+gdp_le_2019 |> 
+  select(Life_Expectancy, Gdp_Per_Capita) |> 
+  correlate()
 ```
 
 25. Add a column to `gdp_le_2019` and calculate the logarithm of GDP per capita. Find the correlation between the log of GDP per capita and life expectancy. How does this compare to the calculation in the previous part? Look at a scatter plot to see if the result of this calculation makes sense.
 
 ```{r}
-
+gdp_le_2019 <- gdp_le_2019 |> 
+  mutate(log(Gdp_Per_Capita))
 ```
+
+```{r}
+gdp_le_2019 |> 
+  select(Life_Expectancy, `log(Gdp_Per_Capita)`) |> 
+  correlate()
+```
+
+
+```{r}
+gdp_le_2019 |> 
+  ggplot(aes(x = log(Gdp_Per_Capita), y = Life_Expectancy)) +
+  geom_point()
+```
+
+Since GDP per capita has values over orders of magnitude, transforming it to a log scale shows a linear relationship. The correlation value is also higher, which also shows a more linear relationship between the log of GDP and life expectancy.
