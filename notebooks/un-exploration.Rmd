@@ -222,4 +222,39 @@ gdp_le_2019 |>
   count()
 ```
 
+22. Find the countries that had the top 3 largest GDP per capita figures for 2019. Create a plot showing the change in life expectancy over time for these three countries. This plot should be faceted so that each country is contained in its own figure.
 
+```{r}
+gdp_le_2019 |> 
+  slice_max(Gdp_Per_Capita, n = 3)
+```
+
+```{r}
+top_3 <- gdp_le_2019 |> 
+  slice_max(Gdp_Per_Capita, n = 3) |> 
+  pull(Country)
+
+gdp_le |> 
+  filter(Country %in% top_3) |> 
+  ggplot(aes(x = Year, y = Life_Expectancy)) +
+  geom_line() +
+  facet_grid(cols = vars(Country))
+```
+
+23. Create a scatter plot of Life Expectancy vs GDP per Capita for the year 2019. What do you notice?
+
+```{r}
+
+```
+
+24. Find the correlation between Life Expectancy and GDP per Capita for the year 2019. What is the meaning of this number?
+
+```{r}
+
+```
+
+25. Add a column to `gdp_le_2019` and calculate the logarithm of GDP per capita. Find the correlation between the log of GDP per capita and life expectancy. How does this compare to the calculation in the previous part? Look at a scatter plot to see if the result of this calculation makes sense.
+
+```{r}
+
+```
