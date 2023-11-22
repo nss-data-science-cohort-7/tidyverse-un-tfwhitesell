@@ -165,6 +165,9 @@ gdp_df |>
 
 ```{r}
 gdp_df |> 
-  
+  filter(Year == 2018) |> 
+  group_by(Continent) |> 
+  ggplot(aes(x = Continent, y = Gdp_Per_Capita)) +
+  geom_boxplot()
 ```
 
