@@ -138,3 +138,33 @@ gdp_df |>
   labs(title = "GDP of Equatorial Guinea 1990-2018")
 ```
 
+13. Read in continents.csv contained in the `data` folder into a new dataframe called `continents`. We will be using this dataframe to add a new column to our dataset.
+
+```{r}
+continents <- read.csv("../data/continents.csv")
+```
+
+14. Merge gdp_df and continents. Keep only the countries that appear in both data frames. Save the result back to gdp_df.
+
+```{r}
+gdp_df <- inner_join(gdp_df, continents)
+```
+
+15. Determine the number of countries per continent. Create a bar chart showing this.
+
+```{r}
+gdp_df |> 
+  group_by(Continent) |> 
+  summarize(count = n_distinct(Country)) |> 
+  ggplot(aes(x = Continent, y = count)) +
+  geom_col() +
+  labs(title = "Number of Countries by Continent")
+```
+
+16. Create a boxplot showing GDP per capita in 2018 split out by continent. What do you notice?
+
+```{r}
+gdp_df |> 
+  
+```
+
