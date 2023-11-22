@@ -201,8 +201,25 @@ life_expectancy <- life_expectancy |> mutate(across(Year, as.integer))
 gdp_le <- inner_join(gdp_df, life_expectancy)
 ```
 
+```{r}
+gdp_le |> head()
+```
+
+```{r}
+gdp_le |> tail()
+```
+
 21. Create a new DataFrame, named `gdp_le_2019` by extracting data for the year 2019 from `gdp_le`. How many countries have a life expectancy of at least 80 in 2019?
 
+```{r}
+gdp_le_2019 <- gdp_le |> 
+  filter(Year == 2019)
+```
 
+```{r}
+gdp_le_2019 |> 
+  filter(Life_Expectancy >= 80) |> 
+  count()
+```
 
 
