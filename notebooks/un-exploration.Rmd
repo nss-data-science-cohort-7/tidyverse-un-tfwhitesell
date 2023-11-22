@@ -244,8 +244,21 @@ gdp_le |>
 23. Create a scatter plot of Life Expectancy vs GDP per Capita for the year 2019. What do you notice?
 
 ```{r}
-
+gdp_le_2019 |> 
+  ggplot(aes(x = Gdp_Per_Capita, y = Life_Expectancy)) +
+  geom_point()
 ```
+There is a correlation between the variables but the relationship is not linear. As GDP per capita increases life expectancy also increases, but the rate of increase levels off at higher GDP values.
+
+```{r}
+gdp_le_2019 |> 
+  ggplot(aes(x = Gdp_Per_Capita, y = Life_Expectancy)) +
+  geom_point() +
+  scale_x_log10()
+```
+
+Since GDP per capita has values over orders of magnitude, transforming it to a log scale shows a linear relationship.
+
 
 24. Find the correlation between Life Expectancy and GDP per Capita for the year 2019. What is the meaning of this number?
 
