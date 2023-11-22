@@ -174,6 +174,15 @@ gdp_df |>
 17. Read life_expectancy.csv into a tibble named life_expectancy. Do not modify the csv file in order to read this data in. 
 
 ```{r}
-life_expectancy <- read_csv("../data/life_expectancy.csv", skip = 4)
+life_expectance <- read_csv("../data/life_expectancy.csv", skip = 4)
+```
+
+18. Drop the Country Code, Indicator Name, and Indicator Code columns. Then use `pivot_longer` to convert your data from wide to long. That is, instead of having one row per country and multiple columns per year, we want to have multiple rows per country and a single column for year. After melting, rename the columns to `Country`, `Year`, and `Life_Expectancy`.
+
+```{r}
+life_expectancy <- life_expectancy |> 
+  select(-c("Country Code", "Indicator Name", "Indicator Code", `2022`, `...68`)) |> 
+  pivot_longer(cols = `1960`:`2021`) |> 
+  rename(Country = `Country Name`, Year = name, Life_Expectancy = value)
 ```
 
