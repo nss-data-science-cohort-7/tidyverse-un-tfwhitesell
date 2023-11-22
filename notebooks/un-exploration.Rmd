@@ -171,3 +171,9 @@ gdp_df |>
   geom_boxplot()
 ```
 
+17. Read life_expectancy.csv into a tibble named life_expectancy. Do not modify the csv file in order to read this data in. 
+
+```{r}
+life_expectancy <- read_csv("../data/life_expectancy.csv", skip = 4)
+```
+
